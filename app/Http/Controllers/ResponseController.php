@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invitation;
 use Illuminate\View\View;
 
 class ResponseController extends Controller
 {
-    public function __invoke($invitation): View
+    public function __invoke(Invitation $invitation): View
     {
         // get survey from service
         $survey = [];

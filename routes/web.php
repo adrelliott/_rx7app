@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Route;
 */
 Route::domain('surveys.' . config('app.domain'))->group(function () {
     
-    Route::get('/{invitation}', ResponseController::class);
+    Route::get('/{invitation}', ResponseController::class)->name('show-survey');
     
     Route::get('/', function() {
         return view('responses.homepage');
-    });
+    })->name('survey-homepage');
 });
 
 
