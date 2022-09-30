@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invitation;
 use Illuminate\View\View;
 
-class ResponseController extends Controller
+class RespondToInvitationController extends Controller
 {
     public function __invoke(Invitation $invitation): View
     {

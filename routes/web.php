@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\RespondToInvitationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Route;
 */
 Route::domain('surveys.' . config('app.domain'))->group(function () {
     
-    Route::get('/{invitation}', ResponseController::class)->name('show-survey');
+    Route::get('/{invitation}', RespondToInvitationController::class)
+        ->name('show-survey')
+        ->middleware('signed');
     
     Route::get('/', function() {
         return view('responses.homepage');
