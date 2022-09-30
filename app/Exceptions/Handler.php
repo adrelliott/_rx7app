@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Routing\Exceptions\InvalidSignatureException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -49,10 +50,17 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (NotFoundHttpException $e, $request) {
-
             if ($request->routeIs('show-survey')) {
-                return response()->view('responses.errors.invalid-invitation', ['e' => $e], 404);
+                return response()->view('responses.errors.invalid-invitation', [
+                    'message' => "Can't seem to find an invitation using that link."
+                ], 404);
             }
+        });
+
+        $this->renderable(function (InvalidSignatureException $e) {
+            return response()->view('responses.errors.invalid-invitation', [
+                'message' => "Are you sure that link is right?"
+            ], 403);
         });
     }
 }
